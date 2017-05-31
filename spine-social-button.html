@@ -1,0 +1,131 @@
+<!--
+  ~ Copyright (c) 2000-2017 TeamDev Ltd. All rights reserved.
+  ~ TeamDev PROPRIETARY and CONFIDENTIAL.
+  ~ Use is subject to license terms.
+  -->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+
+<dom-module id="spine-social-button">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-button {
+        color: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        @apply --spine-social-button;
+
+        --paper-button-raised-keyboard-focus: {
+          @apply --spine-social-button-focus;
+        };
+
+        --paper-button-disabled: {
+          @apply --spine-social-button-disabled;
+        };
+      }
+
+      iron-icon {
+        padding-right: 8px;
+      }
+
+      #divider {
+        display: inline-block;
+        width: 1px;
+        height: 100%;
+        background: rgba(0, 0, 0, .12);
+        position: absolute;
+        left: 40px;
+      }
+
+      #content {
+        padding-left: 8px;
+        text-transform: none;
+        font-size: 16px;
+      }
+
+      paper-button[provider="google"] {
+        background: var(--paper-blue-600);
+      }
+
+      paper-button[provider="github"] {
+        background: var(--paper-teal-900);
+      }
+
+      paper-button[provider="twitter"] {
+        background: #1da1f2;
+      }
+
+      paper-button[provider="facebook"] {
+        background: #4862a3;
+      }
+
+    </style>
+
+
+    <paper-button raised provider$="[[provider]]">
+      <iron-icon src="[[_icon]]" icon="[[icon]]"></iron-icon>
+      <div id="divider"></div>
+      <div id="content">
+        <slot></slot>
+      </div>
+    </paper-button>
+  </dom-repeat>
+  </template>
+
+  <script>
+    /**
+     * `spine-social-button`
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SpineSocialButton extends Polymer.Element {
+      static get is() { return 'spine-social-button'; }
+      static get properties() {
+        return {
+          provider: {
+            type: String,
+            value: ""
+          },
+
+          icon: {
+            type: String
+          },
+
+          _icon: {
+            type: String,
+            computed: "_getProviderIcon(provider)"
+          }
+        };
+      }
+
+      constructor() {
+        super();
+
+        this._providerDefaultIcons = {
+          "google": "https://google.com/favicon.ico",
+          "github": "https://github.com/favicon.ico",
+          "twitter": "https://twitter.com/favicon.ico",
+          "facebook": "https://facebook.com/favicon.ico"
+        };
+      }
+
+      _getProviderIcon(provider) {
+        return this.icon ? "" : this._providerDefaultIcons[provider];
+      }
+    }
+
+    window.customElements.define(SpineSocialButton.is, SpineSocialButton);
+  </script>
+</dom-module>
