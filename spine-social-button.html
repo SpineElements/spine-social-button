@@ -8,6 +8,7 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="./spine-social-button-icons.html">
 
 <dom-module id="spine-social-button">
   <template>
@@ -48,32 +49,32 @@
       }
 
       #content {
-        padding-left: 8px;
+        padding-left: 16px;
         text-transform: none;
         font-size: 16px;
       }
 
       paper-button[provider="google"] {
-        background: var(--paper-blue-600);
+        background: var(--google-blue-700);
       }
 
       paper-button[provider="github"] {
-        background: var(--paper-teal-900);
+        background: #333; /* from https://brandcolors.net/ */
       }
 
       paper-button[provider="twitter"] {
-        background: #1da1f2;
+        background: #1da1f2; /* from https://brandcolors.net/ */
       }
 
       paper-button[provider="facebook"] {
-        background: #4862a3;
+        background: #3b5998; /* from https://brandcolors.net/ */
       }
 
     </style>
 
 
-    <paper-button raised provider$="[[provider]]">
-      <iron-icon src="[[_icon]]" icon="[[icon]]"></iron-icon>
+    <paper-button raised provider$="[[provider]]" id="button">
+      <iron-icon icon="[[_icon]]"></iron-icon>
       <div id="divider"></div>
       <div id="content">
         <slot></slot>
@@ -114,15 +115,22 @@
         super();
 
         this._providerDefaultIcons = {
-          "google": "https://google.com/favicon.ico",
-          "github": "https://github.com/favicon.ico",
-          "twitter": "https://twitter.com/favicon.ico",
-          "facebook": "https://facebook.com/favicon.ico"
+          "google": "spine-sb:google",
+          "github": "spine-sb:github",
+          "twitter": "spine-sb:twitter",
+          "facebook": "spine-sb:facebook"
         };
       }
 
+      connectedCallback () {
+        super.connectedCallback ();
+        setTimeout(() => {
+          this.$.button.style.background = '#333';
+        }, 0);
+      }
+
       _getProviderIcon(provider) {
-        return this.icon ? "" : this._providerDefaultIcons[provider];
+        return this.icon || this._providerDefaultIcons[provider];
       }
     }
 
