@@ -10,11 +10,39 @@
 <link rel="import" href="../paper-styles/paper-styles.html">
 <link rel="import" href="./spine-social-button-icons.html">
 
+
+<!--
+`spine-social-button` is a [<paper-button](https://www.webcomponents.org/element/PolymerElements/paper-button)
+styled with an icon which represents a certain social domain (e.g. Google, Github, Facebook).
+
+Example:
+```
+  <spine-social-button provider="google">Sign up with Google</spine-social-button>
+  <spine-social-button provider="github">Sign up with Github</spine-social-button>
+  <spine-social-button provider="facebook">Sign up with Facebook</spine-social-button>
+  <spine-social-button provider="twitter">Sign up with Twitter</spine-social-button>
+
+  <spine-social-button provider="google" icon="my-icons:google">Sign in with Google</spine-social-button>
+
+  <spine-social-button icon="spine-social-button:google">Share</spine-social-button>
+  <spine-social-button icon="my-icons:twitter">Share</spine-social-button>
+```
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--spine-social-button-background` | Background color of the button | specified by `provider`
+`--spine-social-button` | Mixin applied to the <paper-button> | `{}`
+`--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin| `{}`
+`--spine-social-button-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
+
+-->
 <dom-module id="spine-social-button">
   <template>
     <style>
       :host {
-        display: block;
+        display: inline-block;
       }
 
       paper-button {
@@ -23,6 +51,8 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
+
+        background: var(--spine-social-button-background);
 
         @apply --spine-social-button;
 
@@ -50,6 +80,7 @@
 
       #content {
         padding-left: 16px;
+        padding-right: 16px;
         text-transform: none;
         font-size: 16px;
       }
@@ -73,7 +104,7 @@
     </style>
 
 
-    <paper-button raised provider$="[[provider]]" id="button">
+    <paper-button raised disabled="[[disabled]]" provider$="[[provider]]" id="button">
       <iron-icon icon="[[_icon]]"></iron-icon>
       <div id="divider"></div>
       <div id="content">
@@ -84,23 +115,33 @@
   </template>
 
   <script>
-    /**
-     * `spine-social-button`
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
     class SpineSocialButton extends Polymer.Element {
       static get is() { return 'spine-social-button'; }
       static get properties() {
         return {
+          /**
+           * The icon provider name.
+           * Supported values: "google", "github", "facebook", "twitter".
+           */
           provider: {
             type: String,
             value: ""
           },
 
-          icon: {
+          /**
+           * Determines if button active or not.
+           */
+            disabled: {
+            type: Boolean,
+            value: false
+          },
+
+          /**
+           * The icon name.
+           * The name should has format
+           * compatible with [<iron-icon>](https://www.webcomponents.org/element/PolymerElements/iron-icon)
+           */
+            icon: {
             type: String
           },
 
@@ -115,18 +156,11 @@
         super();
 
         this._providerDefaultIcons = {
-          "google": "spine-sb:google",
-          "github": "spine-sb:github",
-          "twitter": "spine-sb:twitter",
-          "facebook": "spine-sb:facebook"
+          "google": "spine-social-button:google",
+          "github": "spine-social-button:github",
+          "twitter": "spine-social-button:twitter",
+          "facebook": "spine-social-button:facebook"
         };
-      }
-
-      connectedCallback () {
-        super.connectedCallback ();
-        setTimeout(() => {
-          this.$.button.style.background = '#333';
-        }, 0);
       }
 
       _getProviderIcon(provider) {

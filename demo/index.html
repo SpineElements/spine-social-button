@@ -10,23 +10,16 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
     <link rel="import" href="../spine-social-button.html">
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         spine-social-button {
-          margin: 0 auto;
+          display: block;
           padding: 12px;
-          width: 240px;
-        }
-
-        paper-button {
-          background-color: #1e88e5;
-          color: white;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: flex-start;
+          width: 250px;
+          margin: 0 auto;
         }
       </style>
     </custom-style>
@@ -35,10 +28,17 @@
     <div class="vertical-section-container centered">
       <h3>Basic spine-social-button demo</h3>
       <demo-snippet>
-        <spine-social-button provider="google">Sign in with Google</spine-social-button>
-        <spine-social-button provider="facebook">Sign in with Facebook</spine-social-button>
-        <spine-social-button provider="github">Sign in with Github</spine-social-button>
-        <spine-social-button provider="twitter">Sign in with Twitter</spine-social-button>
+        <template>
+          <spine-social-button
+            style="--spine-social-button-background: darkolivegreen"
+            icon="spine-social-button:google">
+            Sign in with Google
+          </spine-social-button>
+
+          <spine-social-button provider="facebook">Sign in with Facebook</spine-social-button>
+          <spine-social-button provider="github">Sign in with Github</spine-social-button>
+          <spine-social-button provider="twitter">Sign in with Twitter</spine-social-button>
+        </template>
       </demo-snippet>
     </div>
   </body>
