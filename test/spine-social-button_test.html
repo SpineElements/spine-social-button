@@ -9,42 +9,81 @@
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../spine-sign-in.html">
+    <link rel="import" href="../spine-social-button.html">
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
+    <test-fixture id="basic">
       <template>
-        <spine-sign-in></spine-sign-in>
+        <spine-social-button></spine-social-button>
       </template>
     </test-fixture>
 
-    <test-fixture id="ChangedPropertyTestFixture">
+    <test-fixture id="google">
       <template>
-        <spine-sign-in prop1="new-prop1"></spine-sign-in>
+        <spine-social-button provider="google"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="github">
+      <template>
+        <spine-social-button provider="github"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="facebook">
+      <template>
+        <spine-social-button provider="facebook"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="twitter">
+      <template>
+        <spine-social-button provider="twitter"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="custom">
+      <template>
+        <spine-social-button icon="custom-icon-set:icon-name"></spine-social-button>
       </template>
     </test-fixture>
 
     <script>
-      suite('spine-sign-in', function() {
+      suite('spine-social-button', function() {
 
-        test('instantiating the element with default properties works', function() {
-          var element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'spine-sign-in');
-          var elementShadowRoot = element.shadowRoot;
-          var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello spine-sign-in!');
+        function testIcon(iconName, fixtureName) {
+          const element = fixture(fixtureName);
+          const button = element.$.button;
+          const icon = button.querySelector('iron-icon');
+
+          assert.equal(icon.icon, iconName);
+        }
+
+        test('instantiating the element works', () => {
+          const element = fixture('basic');
+          assert.equal(element.constructor.is, 'spine-social-button');
         });
 
-        test('setting a property on the element works', function() {
-          // Create a test fixture
-          var element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          var elementShadowRoot = element.shadowRoot;
-          var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+        test('instantiating the element with "google" provider works', () => {
+          testIcon("spine-social-button:google", "google");
         });
 
+        test('instantiating the element with "github" provider works', () => {
+          testIcon("spine-social-button:github", "github");
+        });
+
+        test('instantiating the element with "twitter" provider works', () => {
+          testIcon("spine-social-button:twitter", "twitter");
+        });
+
+        test('instantiating the element with "facebook" provider works', () => {
+          testIcon("spine-social-button:facebook", "facebook");
+        });
+
+        test('instantiating the elemnt with a custom icon works', () => {
+          testIcon("custom-icon-set:icon-name", "custom");
+        });
       });
     </script>
 
