@@ -25,11 +25,11 @@ Custom property | Description | Default
 `--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin| `{}`
 `--spine-social-button-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
 
-The list of default background colors for supported providers:
+The default styling when `provider` property is specified:
 
-Provider name | Color   | Source
---------------|---------|---------
-Google        | #3367d6 | paper-styles/color.html: `--google-blue-700`
-Github        | #333    | http://primercss.io/colors/
-Facebook      | #3b5998 | https://brandcolors.net/b/facebook
-Twitter       | #1da1f2 | https://brand.twitter.com/logo
+Provider property | background-color   | icon
+------------------|--------------------|------------------------------
+google            | #3367d6            | spine-social-button:google
+github            | #333               | spine-social-button:github
+facebook          | #3b5998            | spine-social-button:facebook
+twitter           | #1da1f2            | spine-social-button:twitter
