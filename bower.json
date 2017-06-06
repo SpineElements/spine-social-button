@@ -1,7 +1,7 @@
 {
-  "name": "spine-sign-in",
-  "description": "A simple sign-in form with costumizable content",
-  "main": "spine-sign-in.html",
+  "name": "spine-social-button",
+  "description": "A button equipped with a social domain icon (e.g. Google, Github, Facebook)",
+  "main": "spine-social-button.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-button": "^2.0.0",
@@ -11,7 +11,8 @@
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#2.0-analyzer"
   },
   "resolutions": {
     "polymer": "^2.0.0"

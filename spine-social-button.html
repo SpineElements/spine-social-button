@@ -12,7 +12,7 @@
 
 
 <!--
-`spine-social-button` is a [<paper-button](https://www.webcomponents.org/element/PolymerElements/paper-button)
+`spine-social-button` is a [<paper-button>](https://www.webcomponents.org/element/PolymerElements/paper-button)
 styled with an icon which represents a certain social domain (e.g. Google, Github, Facebook).
 
 Example:
@@ -32,10 +32,19 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--spine-social-button-background` | Background color of the button | specified by `provider`
+`--spine-social-button-background` | Background color of the button | specified according to `provider`
 `--spine-social-button` | Mixin applied to the <paper-button> | `{}`
 `--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin| `{}`
 `--spine-social-button-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
+
+The list of default background colors for supported providers:
+
+Provider name | Color   | Source
+--------------|---------|---------
+Google        | #3367d6 | paper-styles/color.html: `--google-blue-700`
+Github        | #333    | http://primercss.io/colors/
+Facebook      | #3b5998 | https://brandcolors.net/b/facebook
+Twitter       | #1da1f2 | https://brand.twitter.com/logo
 
 -->
 <dom-module id="spine-social-button">
@@ -90,15 +99,15 @@ Custom property | Description | Default
       }
 
       paper-button[provider="github"] {
-        background: #333; /* from https://brandcolors.net/ */
+        background: #333; /* from http://primercss.io/colors/ */
       }
 
       paper-button[provider="twitter"] {
-        background: #1da1f2; /* from https://brandcolors.net/ */
+        background: #1da1f2; /* from https://brand.twitter.com/logo */
       }
 
       paper-button[provider="facebook"] {
-        background: #3b5998; /* from https://brandcolors.net/ */
+        background: #3b5998; /* from https://brandcolors.net/b/facebook */
       }
 
     </style>
@@ -138,8 +147,8 @@ Custom property | Description | Default
 
           /**
            * The icon name.
-           * The name should has format
-           * compatible with [<iron-icon>](https://www.webcomponents.org/element/PolymerElements/iron-icon)
+           * The name should has format compatible with
+           * [<iron-icon>](https://www.webcomponents.org/element/PolymerElements/iron-icon) icon format
            */
             icon: {
             type: String

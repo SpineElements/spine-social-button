@@ -1,6 +1,6 @@
 # \<spine-ssocial-button\>
 
-`spine-social-button` is a [<paper-button](https://www.webcomponents.org/element/PolymerElements/paper-button)
+`spine-social-button` is a [<paper-button>](https://www.webcomponents.org/element/PolymerElements/paper-button)
 styled with an icon which represents a certain social domain (e.g. Google, Github, Facebook).
 
 Example:
@@ -20,7 +20,16 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--spine-social-button-background` | Background color of the button | specified by `provider`
+`--spine-social-button-background` | Background color of the button | specified according to `provider`
 `--spine-social-button` | Mixin applied to the <paper-button> | `{}`
 `--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin| `{}`
 `--spine-social-button-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
+
+The list of default background colors for supported providers:
+
+Provider name | Color   | Source
+--------------|---------|---------
+Google        | #3367d6 | paper-styles/color.html: `--google-blue-700`
+Github        | #333    | http://primercss.io/colors/
+Facebook      | #3b5998 | https://brandcolors.net/b/facebook
+Twitter       | #1da1f2 | https://brand.twitter.com/logo
