@@ -55,7 +55,6 @@ Twitter       | #1da1f2 | https://brand.twitter.com/logo
       }
 
       paper-button {
-        color: white;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -164,12 +163,26 @@ Twitter       | #1da1f2 | https://brand.twitter.com/logo
       constructor() {
         super();
 
+        this._providers = {
+          "google": true,
+          "github": true,
+          "facebook": true,
+          "twitter": true
+        };
+
         this._providerDefaultIcons = {
           "google": "spine-social-button:google",
           "github": "spine-social-button:github",
           "twitter": "spine-social-button:twitter",
           "facebook": "spine-social-button:facebook"
         };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (this._providers[this.provider]) {
+          this.$.button.style.color = 'var(--dark-theme-text-color)';
+        }
       }
 
       _getProviderIcon(provider) {
