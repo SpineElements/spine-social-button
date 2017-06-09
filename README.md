@@ -22,8 +22,8 @@ Custom property | Description | Default
 ----------------|-------------|----------
 `--spine-social-button-background` | Background color of the button | specified according to `provider`
 `--spine-social-button` | Mixin applied to the <paper-button> | `{}`
-`--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin| `{}`
-`--spine-social-button-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
+`--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin | `{}`
+`--spine-social-button-keyboard-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
 
 The default styling when `provider` property is specified:
 
