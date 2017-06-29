@@ -60,6 +60,7 @@ twitter           | #1da1f2            | spine-social-button:twitter
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
+        box-shadow: none;
 
         background: var(--spine-social-button-background);
 
@@ -67,7 +68,8 @@ twitter           | #1da1f2            | spine-social-button:twitter
 
         @apply --spine-social-button;
 
-        --paper-button: {};
+        --paper-button: {
+        };
 
         --paper-button-raised-keyboard-focus: {
           @apply --spine-social-button-keyboard-focus;
@@ -79,7 +81,7 @@ twitter           | #1da1f2            | spine-social-button:twitter
       }
 
       iron-icon {
-        padding-right: 8px;
+        width: 32px;
       }
 
       #divider {
@@ -96,6 +98,8 @@ twitter           | #1da1f2            | spine-social-button:twitter
         padding-right: 16px;
         text-transform: none;
         font-size: 16px;
+        width: 100%;
+        text-align: center;
       }
 
       paper-button[provider="google"] {
@@ -114,6 +118,15 @@ twitter           | #1da1f2            | spine-social-button:twitter
         background: #3b5998; /* from https://brandcolors.net/b/facebook */
       }
 
+      paper-button:hover {
+        @apply --shadow-elevation-2dp;
+      }
+
+      paper-button:focus {
+        @apply --shadow-elevation-4dp;
+        font-weight: inherit;
+      }
+
     </style>
 
 
@@ -124,12 +137,15 @@ twitter           | #1da1f2            | spine-social-button:twitter
         <slot></slot>
       </div>
     </paper-button>
-  </dom-repeat>
+    </dom-repeat>
   </template>
 
   <script>
     class SpineSocialButton extends Polymer.Element {
-      static get is() { return 'spine-social-button'; }
+      static get is() {
+        return 'spine-social-button';
+      }
+
       static get properties() {
         return {
           /**
@@ -144,7 +160,7 @@ twitter           | #1da1f2            | spine-social-button:twitter
           /**
            * Determines if button active or not.
            */
-            disabled: {
+          disabled: {
             type: Boolean,
             value: false
           },
@@ -154,7 +170,7 @@ twitter           | #1da1f2            | spine-social-button:twitter
            * The name should has format compatible with
            * [<iron-icon>](https://www.webcomponents.org/element/PolymerElements/iron-icon) icon format
            */
-            icon: {
+          icon: {
             type: String
           },
 
