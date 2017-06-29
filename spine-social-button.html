@@ -1,0 +1,195 @@
+<!--
+  ~ Copyright (c) 2000-2017 TeamDev Ltd. All rights reserved.
+  ~ TeamDev PROPRIETARY and CONFIDENTIAL.
+  ~ Use is subject to license terms.
+  -->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="./spine-social-button-icons.html">
+
+
+<!--
+`spine-social-button` is a [<paper-button>](https://www.webcomponents.org/element/PolymerElements/paper-button)
+styled with an icon which represents a certain social domain (e.g. Google, Github, Facebook).
+
+Example:
+```
+  <spine-social-button provider="google">Sign up with Google</spine-social-button>
+  <spine-social-button provider="github">Sign up with Github</spine-social-button>
+  <spine-social-button provider="facebook">Sign up with Facebook</spine-social-button>
+  <spine-social-button provider="twitter">Sign up with Twitter</spine-social-button>
+
+  <spine-social-button provider="google" icon="my-icons:google">Sign in with Google</spine-social-button>
+
+  <spine-social-button icon="spine-social-button:google">Share</spine-social-button>
+  <spine-social-button icon="my-icons:twitter">Share</spine-social-button>
+```
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--spine-social-button-background` | Background color of the button | specified according to `provider`
+`--spine-social-button` | Mixin applied to the <paper-button> | `{}`
+`--spine-social-button-disabled` | Mixin passed to the `--paper-button-disabled` mixin | `{}`
+`--spine-social-button-keyboard-focus` | Mixin passed to the `--paper-button-raised-keyboard-focus` mixin | `{}`
+
+The default styling when `provider` property is specified:
+
+Provider property | background-color   | icon
+------------------|--------------------|------------------------------
+google            | #3367d6            | spine-social-button:google
+github            | #333               | spine-social-button:github
+facebook          | #3b5998            | spine-social-button:facebook
+twitter           | #1da1f2            | spine-social-button:twitter
+
+-->
+<dom-module id="spine-social-button">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+      }
+
+      paper-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        background: var(--spine-social-button-background);
+
+        @apply --spine-social-button;
+
+        --paper-button-raised-keyboard-focus: {
+          @apply --spine-social-button-keyboard-focus;
+        };
+
+        --paper-button-disabled: {
+          @apply --spine-social-button-disabled;
+        };
+      }
+
+      iron-icon {
+        padding-right: 8px;
+      }
+
+      #divider {
+        display: inline-block;
+        width: 1px;
+        height: 100%;
+        background: rgba(0, 0, 0, var(--dark-divider-opacity));
+        position: absolute;
+        left: 40px;
+      }
+
+      #content {
+        padding-left: 16px;
+        padding-right: 16px;
+        text-transform: none;
+        font-size: 16px;
+      }
+
+      paper-button[provider="google"] {
+        background: var(--google-blue-700);
+      }
+
+      paper-button[provider="github"] {
+        background: #333; /* from http://primercss.io/colors/ */
+      }
+
+      paper-button[provider="twitter"] {
+        background: #1da1f2; /* from https://brand.twitter.com/logo */
+      }
+
+      paper-button[provider="facebook"] {
+        background: #3b5998; /* from https://brandcolors.net/b/facebook */
+      }
+
+    </style>
+
+
+    <paper-button raised disabled="[[disabled]]" provider$="[[provider]]" id="button">
+      <iron-icon icon="[[_icon]]"></iron-icon>
+      <div id="divider"></div>
+      <div id="content">
+        <slot></slot>
+      </div>
+    </paper-button>
+  </dom-repeat>
+  </template>
+
+  <script>
+    class SpineSocialButton extends Polymer.Element {
+      static get is() { return 'spine-social-button'; }
+      static get properties() {
+        return {
+          /**
+           * The icon provider name.
+           * Supported values: "google", "github", "facebook", "twitter".
+           */
+          provider: {
+            type: String,
+            value: ""
+          },
+
+          /**
+           * Determines if button active or not.
+           */
+            disabled: {
+            type: Boolean,
+            value: false
+          },
+
+          /**
+           * The icon name.
+           * The name should has format compatible with
+           * [<iron-icon>](https://www.webcomponents.org/element/PolymerElements/iron-icon) icon format
+           */
+            icon: {
+            type: String
+          },
+
+          _icon: {
+            type: String,
+            computed: "_getProviderIcon(provider)"
+          }
+        };
+      }
+
+      constructor() {
+        super();
+
+        this._providers = {
+          "google": true,
+          "github": true,
+          "facebook": true,
+          "twitter": true
+        };
+
+        this._providerDefaultIcons = {
+          "google": "spine-social-button:google",
+          "github": "spine-social-button:github",
+          "twitter": "spine-social-button:twitter",
+          "facebook": "spine-social-button:facebook"
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (this._providers[this.provider]) {
+          this.$.button.style.color = 'var(--dark-theme-text-color)';
+        }
+      }
+
+      _getProviderIcon(provider) {
+        return this.icon || this._providerDefaultIcons[provider];
+      }
+    }
+
+    window.customElements.define(SpineSocialButton.is, SpineSocialButton);
+  </script>
+</dom-module>

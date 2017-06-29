@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>spine-social-button test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../spine-social-button.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <spine-social-button></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="google">
+      <template>
+        <spine-social-button provider="google"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="github">
+      <template>
+        <spine-social-button provider="github"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="facebook">
+      <template>
+        <spine-social-button provider="facebook"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="twitter">
+      <template>
+        <spine-social-button provider="twitter"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="custom">
+      <template>
+        <spine-social-button icon="custom-icon-set:icon-name"></spine-social-button>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('spine-social-button', function() {
+
+        function testIcon(iconName, fixtureName) {
+          const element = fixture(fixtureName);
+          const button = element.$.button;
+          const icon = button.querySelector('iron-icon');
+
+          assert.equal(icon.icon, iconName);
+        }
+
+        test('instantiating the element works', () => {
+          const element = fixture('basic');
+          assert.equal(element.constructor.is, 'spine-social-button');
+        });
+
+        test('instantiating the element with "google" provider works', () => {
+          testIcon("spine-social-button:google", "google");
+        });
+
+        test('instantiating the element with "github" provider works', () => {
+          testIcon("spine-social-button:github", "github");
+        });
+
+        test('instantiating the element with "twitter" provider works', () => {
+          testIcon("spine-social-button:twitter", "twitter");
+        });
+
+        test('instantiating the element with "facebook" provider works', () => {
+          testIcon("spine-social-button:facebook", "facebook");
+        });
+
+        test('instantiating the element with a custom icon works', () => {
+          testIcon("custom-icon-set:icon-name", "custom");
+        });
+      });
+    </script>
+
+  </body>
+</html>

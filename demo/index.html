@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>spine-social-button demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+
+    <link rel="import" href="../spine-social-button.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        spine-social-button {
+          display: block;
+          padding: 12px;
+          width: 250px;
+          margin: 0 auto;
+        }
+
+        spine-social-button.customized {
+          --spine-social-button: {
+            background: darkolivegreen;
+            color: var(--dark-theme-text-color);
+          }
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body unresolved>
+    <div class="vertical-section-container centered">
+      <h3>Basic spine-social-button example</h3>
+      <demo-snippet>
+        <template>
+          <spine-social-button
+            class="customized"
+            icon="spine-social-button:google">
+            Sign in with Google
+          </spine-social-button>
+
+          <spine-social-button provider="facebook">Sign in with Facebook</spine-social-button>
+          <spine-social-button provider="github">Sign in with Github</spine-social-button>
+          <spine-social-button provider="twitter">Sign in with Twitter</spine-social-button>
+
+          <style is="custom-style">
+            spine-social-button.customized {
+              --spine-social-button: {
+                background: darkolivegreen;
+                color: var(--dark-theme-text-color);
+              }
+            }
+          </style>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
